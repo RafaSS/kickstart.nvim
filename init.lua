@@ -4,6 +4,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.opt.tabstop = 2
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -163,7 +164,14 @@ rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'nmac427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'nmac427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+    config = function()
+      require('guess-indent').setup {
+        auto_cmd = true,
+      }
+    end,
+  },
   {
     'm4xshen/autoclose.nvim',
     config = function()
@@ -174,7 +182,8 @@ require('lazy').setup({
       }
     end,
   },
-  -- NOTE: Plugins can also be added by using a table,
+  { 'ThePrimeagen/harpoon', branch = 'harpoon2', dependencies = { 'nvim-lua/plenary.nvim' } },
+  -- NOTE: Plugins can also be added by using a table
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
   --
