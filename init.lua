@@ -91,6 +91,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('n', '<Leader>w', ':w<Cr>', { desc = '[W]rite changes' }, { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>wq', ':wq<Cr>', { desc = '[W]rite changes and quit' }, { noremap = true, silent = true })
 vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -101,7 +102,7 @@ vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 -- Enter oil
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -201,7 +202,7 @@ require('lazy').setup({
         -- Window-local options to use for oil buffers
         win_options = {
           wrap = false,
-          signcolumn = 'no',
+          signcolumn = 'yes',
           cursorcolumn = false,
           foldcolumn = '0',
           spell = false,
@@ -212,7 +213,7 @@ require('lazy').setup({
         -- Send deleted files to the trash instead of permanently deleting them (:help oil-trash)
         delete_to_trash = false,
         -- Skip the confirmation popup for simple operations (:help oil.skip_confirm_for_simple_edits)
-        skip_confirm_for_simple_edits = false,
+        skip_confirm_for_simple_edits = true,
         -- Selecting a new/moved/renamed file or directory will prompt you to save changes first
         -- (:help prompt_save_on_select_new_entry)
         prompt_save_on_select_new_entry = true,
@@ -227,7 +228,7 @@ require('lazy').setup({
           timeout_ms = 1000,
           -- Set to true to autosave buffers that are updated with LSP willRenameFiles
           -- Set to "unmodified" to only save unmodified buffers
-          autosave_changes = false,
+          autosave_changes = true,
         },
         -- Constrain the cursor to the editable parts of the oil buffer
         -- Set to `false` to disable, or "name" to keep it on the file names
@@ -262,7 +263,7 @@ require('lazy').setup({
         use_default_keymaps = true,
         view_options = {
           -- Show files and directories that start with "."
-          show_hidden = false,
+          show_hidden = true,
           -- This function defines what is considered a "hidden" file
           is_hidden_file = function(name, bufnr)
             local m = name:match '^%.'
